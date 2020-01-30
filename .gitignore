@@ -1,0 +1,7 @@
+/jnk/settings.py
+/static/img/
+*__pycache__*
+static/img/*
+jnk/settings.py
+.idea
+/static/img/
