@@ -1,7 +1,4 @@
 /jnk/settings.py
-/static/img/
-*__pycache__*
-static/img/*
 jnk/settings.py
+*__pycache__*
 .idea
-/static/img/
