@@ -48,8 +48,8 @@ class Device(models.Model):
 
     device_id = models.AutoField(primary_key=True)
     device_name = models.CharField(max_length=50)
-    device_service_date = models.DateField()
-    device_model_id = models.ForeignKey(Model, on_delete=models.CASCADE, )
-    device_place_id = models.ForeignKey(Place, on_delete=models.CASCADE, )
-    device_type_id = models.ForeignKey(Type, on_delete=models.CASCADE, )
+    device_service_date = models.DateField(default=None)
+    device_model_id = models.ForeignKey(Model, on_delete=models.CASCADE, default=None)
+    device_place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
+    device_type_id = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
     device_refillable = models.BooleanField()
