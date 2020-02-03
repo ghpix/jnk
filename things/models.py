@@ -24,8 +24,8 @@ class Type(models.Model):
 
 class Manufacturer(models.Model):
     class Meta:
-        verbose_name = 'Type'
-        verbose_name_plural = 'Types'
+        verbose_name = 'Manufacturer'
+        verbose_name_plural = 'Manufacturers'
 
     manufacturer_id = models.AutoField(primary_key=True)
     manufacturer_name = models.CharField(max_length=50)
@@ -33,8 +33,8 @@ class Manufacturer(models.Model):
 
 class Model(models.Model):
     class Meta:
-        verbose_name = 'Type'
-        verbose_name_plural = 'Types'
+        verbose_name = 'Model'
+        verbose_name_plural = 'Models'
 
     model_id = models.AutoField(primary_key=True)
     model_manufacturer_id = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, )
