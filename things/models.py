@@ -67,8 +67,9 @@ class Device(models.Model):
         today_count = 1 + obj.count()
         return date_str + "%02d" % today_count
 
-    def get_date_f(self):
-        return date.today().strftime('%D-%M-%Y')
+    # @staticmethod
+    # def get_date_f(self):
+    #     return date.today().strftime('%D-%M-%Y')
 
     device_sn = _make_sn.__get__(object)
 
@@ -83,5 +84,18 @@ class Device(models.Model):
     device_refillable = models.BooleanField()
 
     def __str__(self):
-        return f'{self.device_id} {self.device_name} {self.device_serial_number}   -  {self.device_service_date}'
+        return f'{self.device_id} {self.device_name} {self.device_serial_number} {self.device_service_date} ' \
+               f'{self.device_add_date}'
 
+
+class Param(models.Model):
+    class Meta:
+        verbose_name = 'Param'
+        verbose_name_plural = 'Params'
+
+    param_id = models.AutoField(primary_key=True)
+    param_name = models.CharField(max_length=50, unique=True)
+    model_manufacturer_id = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, )
+
+    def __str__(self):
+        return f'{self.param_name}'

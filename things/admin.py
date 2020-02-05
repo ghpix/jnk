@@ -19,8 +19,8 @@ device_id = models.AutoField(primary_key=True)
 
 @admin.register(Device)
 class ThingsAdmin(admin.ModelAdmin):
-    list_display = ('device_id', 'device_name', 'device_serial_number', 'device_service_date',)
-    list_display_links = ('device_id', 'device_name', 'device_serial_number', 'device_service_date',)
+    list_display = ('device_id', 'device_name', 'device_serial_number', 'device_service_date', 'device_add_date',)
+    list_display_links = ('device_id', 'device_name', 'device_serial_number', 'device_service_date','device_add_date',)
     empty_value_display = 'not stated'
 
 
