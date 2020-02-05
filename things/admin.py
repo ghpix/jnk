@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 
-from .models import Place, Device, Type, Manufacturer, Model
+from .models import Place, Device, Type, Manufacturer, Model, Param
 
 '''
 device_id = models.AutoField(primary_key=True)
@@ -29,3 +29,4 @@ admin.site.register(Place)
 admin.site.register(Type)
 admin.site.register(Manufacturer)
 admin.site.register(Model)
+admin.site.register(Param)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from datetime import datetime, date
 
 
@@ -17,6 +18,19 @@ class Place(models.Model):
         return f'{self.place_name}'
 
 
+class Param(models.Model):
+    class Meta:
+        verbose_name = 'Param'
+        verbose_name_plural = 'Params'
+
+    param_id = models.AutoField(primary_key=True)
+    param_name = models.CharField(max_length=50, unique=True)
+
+
+    def __str__(self):
+        return f'{self.param_name}'
+
+
 class Type(models.Model):
     class Meta:
         verbose_name = 'Type'
@@ -24,6 +38,7 @@ class Type(models.Model):
 
     type_id = models.AutoField(primary_key=True)
     type_name = models.CharField(max_length=50, unique=True)
+    param_list = models.ManyToManyField(Param, blank=True, default=None)
 
     def __str__(self):
         return f'{self.type_name}'
@@ -76,8 +91,8 @@ class Device(models.Model):
     device_id = models.AutoField(primary_key=True)
     device_name = models.CharField(max_length=50, unique=True)
     device_serial_number = models.CharField(max_length=50, unique=True, default=device_sn)
-    device_service_date = models.DateField(default=datetime.now())
-    device_add_date = models.DateField(default=datetime.now())
+    device_service_date = models.DateField(default=timezone.now)
+    device_add_date = models.DateField(default=timezone.now)
     device_model_id = models.ForeignKey(Model, on_delete=models.CASCADE, default=None)
     device_place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
     device_type_id = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
@@ -86,16 +101,3 @@ class Device(models.Model):
     def __str__(self):
         return f'{self.device_id} {self.device_name} {self.device_serial_number} {self.device_service_date} ' \
                f'{self.device_add_date}'
-
-
-class Param(models.Model):
-    class Meta:
-        verbose_name = 'Param'
-        verbose_name_plural = 'Params'
-
-    param_id = models.AutoField(primary_key=True)
-    param_name = models.CharField(max_length=50, unique=True)
-    model_manufacturer_id = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, )
-
-    def __str__(self):
-        return f'{self.param_name}'
