@@ -30,6 +30,19 @@ class Unit(models.Model):
         return f'{self.unit_name}'
 
 
+# class ParamValue(models.Model):
+#     class Meta:
+#         verbose_name = 'ParamValue'
+#         verbose_name_plural = 'ParamValues'
+#
+#     param_val_id = models.AutoField(primary_key=True)
+#     param_unit_name = models.ForeignKey(Unit, null=True, on_delete=models.SET_NULL)
+#     param_value = models.CharField(max_length=50, unique=False)
+#
+#     def __str__(self):
+#         return f'{self.param_value}'
+
+
 class Param(models.Model):
     class Meta:
         verbose_name = 'Param'
@@ -84,6 +97,7 @@ class Model(models.Model):
 
 class Device(models.Model):
     class Meta:
+        ordering = ['device_id', 'device_name' ]
         verbose_name = 'Device'
         verbose_name_plural = 'Devices'
 
@@ -95,14 +109,10 @@ class Device(models.Model):
         today_count = 1 + obj.count()
         return date_str + "%02d" % today_count
 
-    # @staticmethod
-    # def get_date_f(self):
-    #     return date.today().strftime('%D-%M-%Y')
-
     device_sn = _make_sn.__get__(object)
 
     device_id = models.AutoField(primary_key=True)
-    device_name = models.CharField(max_length=50, unique=True)
+    device_name = models.CharField(max_length=50, unique=False, help_text="Enter the name as on the official website")
     device_serial_number = models.CharField(max_length=50, unique=True, default=device_sn)
     device_service_date = models.DateField(default=timezone.now)
     device_add_date = models.DateField(default=timezone.now)
