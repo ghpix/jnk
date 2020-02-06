@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 
-from .models import Place, Device, Type, Manufacturer, Model, Param
+from .models import Place, Device, Type, Manufacturer, Model, Param, Unit
 
 '''
 device_id = models.AutoField(primary_key=True)
@@ -20,7 +20,7 @@ device_id = models.AutoField(primary_key=True)
 @admin.register(Device)
 class ThingsAdmin(admin.ModelAdmin):
     list_display = ('device_id', 'device_name', 'device_serial_number', 'device_service_date', 'device_add_date',)
-    list_display_links = ('device_id', 'device_name', 'device_serial_number', 'device_service_date','device_add_date',)
+    list_display_links = ('device_id', 'device_name', 'device_serial_number', 'device_service_date', 'device_add_date',)
     empty_value_display = 'not stated'
 
 
@@ -30,3 +30,4 @@ admin.site.register(Type)
 admin.site.register(Manufacturer)
 admin.site.register(Model)
 admin.site.register(Param)
+admin.site.register(Unit)

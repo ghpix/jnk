@@ -18,6 +18,18 @@ class Place(models.Model):
         return f'{self.place_name}'
 
 
+class Unit(models.Model):
+    class Meta:
+        verbose_name = 'Unit'
+        verbose_name_plural = 'Units'
+
+    unit_id = models.AutoField(primary_key=True)
+    unit_name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return f'{self.unit_name}'
+
+
 class Param(models.Model):
     class Meta:
         verbose_name = 'Param'
@@ -25,10 +37,11 @@ class Param(models.Model):
 
     param_id = models.AutoField(primary_key=True)
     param_name = models.CharField(max_length=50, unique=True)
-
+    param_unit = models.OneToOneField(Unit, null=True, on_delete=models.SET_NULL)
+    param_part = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.param_name}'
+        return f'{self.param_name} '
 
 
 class Type(models.Model):
@@ -96,7 +109,7 @@ class Device(models.Model):
     device_model_id = models.ForeignKey(Model, on_delete=models.CASCADE, default=None)
     device_place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
     device_type_id = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
-    device_refillable = models.BooleanField()
+    device_part = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.device_id} {self.device_name} {self.device_serial_number} {self.device_service_date} ' \
