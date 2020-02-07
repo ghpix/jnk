@@ -97,7 +97,7 @@ class Model(models.Model):
 
 class Device(models.Model):
     class Meta:
-        ordering = ['device_id', 'device_name' ]
+        ordering = ['device_id', 'device_name']
         verbose_name = 'Device'
         verbose_name_plural = 'Devices'
 
@@ -112,14 +112,15 @@ class Device(models.Model):
     device_sn = _make_sn.__get__(object)
 
     device_id = models.AutoField(primary_key=True)
-    device_name = models.CharField(max_length=50, unique=False, help_text="Enter the name as on the official website")
-    device_serial_number = models.CharField(max_length=50, unique=True, default=device_sn)
-    device_service_date = models.DateField(default=timezone.now)
+    device_name = models.CharField(max_length=50, unique=False, help_text='Enter the name as on the official website')
+    device_serial_number = models.CharField(max_length=50, unique=True, default=device_sn,
+                                            help_text='Enter the serial number')
+    device_service_date = models.DateField(default=timezone.now, help_text='Enter service date')
     device_add_date = models.DateField(default=timezone.now)
-    device_model_id = models.ForeignKey(Model, on_delete=models.CASCADE, default=None)
-    device_place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
-    device_type_id = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
-    device_part = models.BooleanField(default=False)
+    device_model_id = models.ForeignKey(Model, on_delete=models.CASCADE, default=None, help_text='Select model')
+    device_place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None, help_text='Choose location')
+    device_type_id = models.ForeignKey(Type, on_delete=models.CASCADE, default=None, help_text='Select type')
+    device_part = models.BooleanField(default=False, help_text='Select type')
 
     def __str__(self):
         return f'{self.device_id} {self.device_name} {self.device_serial_number} {self.device_service_date} ' \
