@@ -120,7 +120,7 @@ class Device(models.Model):
     device_model_id = models.ForeignKey(Model, on_delete=models.CASCADE, default=None, help_text='Select model')
     device_place_id = models.ForeignKey(Place, on_delete=models.CASCADE, default=None, help_text='Choose location')
     device_type_id = models.ForeignKey(Type, on_delete=models.CASCADE, default=None, help_text='Select type')
-    device_part = models.BooleanField(default=False, help_text='Select type')
+    device_part = models.BooleanField(default=False, help_text='Choose if it is a component of something')
 
     def __str__(self):
         return f'{self.device_id} {self.device_name} {self.device_serial_number} {self.device_service_date} ' \
