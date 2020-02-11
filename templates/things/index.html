@@ -1,5 +1,42 @@
-{% extends 'things/base.html' %}
+{% extends 'things/base2.html' %}
 <!-- переопределение блока title -->
 {% block title %}Index{% endblock %}
+{% block block_name %}Список Устройств{% endblock %}
+{% block block_content %}
 
-{% block content %}{% endblock %}
+    {% if device.count > 0 %}
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Имя Утройства</th>
+                    <th scope="col">Серийный номер</th>
+                    <th scope="col">Модель</th>
+                    <th scope="col">Дата обслуживания</th>
+                    <th scope="col">Дата добавления</th>
+                    <th scope="col">Расположение</th>
+                    <th scope="col">Тип устройства</th>
+                    <th scope="col">Компонент</th>
+                </tr>
+                </thead>
+
+                {% for device in device %}
+                    <tr>
+                        <td>{{ device.device_id }}</td>
+                        <td>{{ device.device_name }}</td>
+                        <td>{{ device.device_serial_number }}</td>
+                        <td>{{ device.device_model_id }}</td>
+                        <td>{{ device.device_service_date }}</td>
+                        <td>{{ device.device_add_date }}</td>
+                        <td>{{ device.device_place_id }}</td>
+                        <td>{{ device.device_type_id }}</td>
+                        <td>{{ device.device_part }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+
+{% endblock %}
