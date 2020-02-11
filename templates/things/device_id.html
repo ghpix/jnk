@@ -4,9 +4,14 @@
 {% block block_name %}Список Устройств{% endblock %}
 {% block block_content %}
 
-    {% if device_list %}
-        {{ device_list }}
+    <h1>{{ object.headline }}</h1>
+<p>{{ object.content }}</p>
+<p>Reporter: {{ object.reporter }}</p>
+<p>Published: {{ object.pub_date|date }}</p>
+<p>Date: {{ now|date }}</p>
 
+{% comment %}
+    {% if device.count > 0 %}
         <div class="table-responsive">
             <table class="table table-sm table-striped">
                 <thead class="thead-dark">
@@ -23,7 +28,7 @@
                 </tr>
                 </thead>
 
-                {% for device in device_list %}
+                {% for device in device %}
                     <tr>
                         <td>{{ device.device_id }}</td>
                         <td>{{ device.device_name }}</td>
@@ -39,6 +44,7 @@
             </table>
         </div>
     {% endif %}
+    {% endcomment %}
 
 
 {% endblock %}
