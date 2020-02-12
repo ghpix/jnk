@@ -23,34 +23,29 @@ def things_id(request, device_id):
         'device': device,
         'test': list(range(1, 11)),  # например список 10 чисел
     }
-    response = render(request, 'things/device_id.html', args)
+    response = render(request, 'things/device_details.html', args)
     return response
 
 
+# show all devices
 class ThingsList(ListView):
     model = Device
     template_name = 'things/index.html'
     context_object_name = 'device_list'
 
-    # Фильт вывода
+    # # todo Filter !!!
     def get_context_data(self, **kwargs):
-        # context = Device.objects.all()
-        context = super().get_context_data(**kwargs)
-        args = {
-            'block_name': 'Device List',
-        }
-        context.update(args)
-        return context
+        queryset = super().get_queryset
+        queryset = queryset.filter(device_id=1)
+        return queryset
 
 
+# show one device details
 class ThingsId(DetailView):
     model = Device
-    template_name = 'things/index.html'
-    context_object_name = 'device_list'
+    template_name = 'things/device_details.html'
 
-    # Фильт вывода
     def get_context_data(self, **kwargs):
-        # context = Device.objects.all()
         context = super().get_context_data(**kwargs)
-        context['block_name'] = 'Device details'
+        print(context)
         return context

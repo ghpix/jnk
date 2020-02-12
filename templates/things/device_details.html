@@ -1,0 +1,9 @@
+{% extends 'things/base.html' %}
+<!-- переопределение блока title -->
+{% block title %}{{ object.device_id }}{% endblock %}
+{% block block_name %}{{ object.device_name }}{% endblock %}
+{% block block_content %}
+
+    {{ object.device_name }}
+
+{% endblock %}
