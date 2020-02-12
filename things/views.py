@@ -33,11 +33,11 @@ class ThingsList(ListView):
     template_name = 'things/index.html'
     context_object_name = 'device_list'
 
-    # # todo Filter !!!
-    def get_context_data(self, **kwargs):
-        queryset = super().get_queryset
-        queryset = queryset.filter(device_id=1)
-        return queryset
+    # # # todo Filter !!!
+    # def get_context_data(self, **kwargs):
+    #     queryset = super().get_queryset
+    #     queryset = queryset.filter(device_id=1)
+    #     return queryset
 
 
 # show one device details

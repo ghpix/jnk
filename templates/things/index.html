@@ -1,14 +1,19 @@
 {% extends 'things/base.html' %}
 <!-- переопределение блока title -->
 {% block title %}Index{% endblock %}
-{% block block_name %}Список Устройств{% endblock %}
+{% block custom_css %}
+    <style type="text/css">
+        .table-row {
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+{% block block_header %} <h2 class="h2">Список Устройств</h2>{% endblock %}
 {% block block_content %}
 
     {% if device_list %}
-        {{ device_list }}
-
         <div class="table-responsive">
-            <table class="table table-sm table-striped">
+            <table class="table table-sm table-striped table-hover">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">Id</th>
@@ -24,7 +29,7 @@
                 </thead>
 
                 {% for device in device_list %}
-                    <tr>
+                    <tr  class="table-row" data-href="{% url 'things:index' %}{{ device.device_id }}">
                         <td>{{ device.device_id }}</td>
                         <td>{{ device.device_name }}</td>
                         <td>{{ device.device_serial_number }}</td>
@@ -34,11 +39,20 @@
                         <td>{{ device.device_place_id }}</td>
                         <td>{{ device.device_type_id }}</td>
                         <td>{{ device.device_part }}</td>
+
                     </tr>
                 {% endfor %}
             </table>
         </div>
     {% endif %}
+{% endblock %}
 
-
+{% block custom_script %}
+    <script>
+        $(document).ready(function ($) {
+            $(".table-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'things/base.html' %}
 <!-- переопределение блока title -->
 {% block title %}{{ object.device_id }}{% endblock %}
-{% block block_name %}{{ object.device_name }}{% endblock %}
+{% block block_header %}<button type="button" class="btn btn-sm btn-outline-secondary" onclick="javascript:history.back()">Go Back</button><h2 class="h2">{{ object.device_name }}</h2>{% endblock %}
 {% block block_content %}
 
     {{ object.device_name }}

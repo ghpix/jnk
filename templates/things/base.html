@@ -14,6 +14,7 @@
     <link href="{% static 'img/logo.png' %}" rel="icon">
     <!-- Custom styles for this template -->
     <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    {% block custom_css %}{% endblock %}
 
 </head>
 <body>
@@ -81,7 +82,7 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 <!-- Page Content -->
-                <h1 class="h2">{% block block_name %}Block name{% endblock %}</h1>
+               {% block block_header %} <h1 class="h2">Block name</h1>{% endblock %}
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -108,5 +109,6 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{% static '/js/jquery.slim.min.js' %}"></script>
 <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+{% block custom_script %}{% endblock %}
 </body>
 </html>
