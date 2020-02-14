@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from datetime import datetime, date
+from django.urls import reverse
 
 
 # Create your models here.
@@ -101,6 +102,9 @@ class Device(models.Model):
         verbose_name = 'Device'
         verbose_name_plural = 'Devices'
 
+    def get_absolute_url(self):
+        return reverse('things:device_details', kwargs={'pk': self.pk})
+
     # _make_sn my company default serial number format DDMMYYNUM   - NUM > number 00-99
     @staticmethod
     def _make_sn():
@@ -109,11 +113,12 @@ class Device(models.Model):
         today_count = 1 + obj.count()
         return date_str + "%02d" % today_count
 
-    device_sn = _make_sn.__get__(object)
+    # device_sn = _make_sn.__get__(object)
+    device_sn = '00000000'
 
     device_id = models.AutoField(primary_key=True)
     device_name = models.CharField(max_length=50, unique=False, help_text='Enter the name as on the official website')
-    device_serial_number = models.CharField(max_length=50, unique=True, default=device_sn,
+    device_serial_number = models.CharField(max_length=50, unique=True,
                                             help_text='Enter the serial number')
     device_service_date = models.DateField(default=timezone.now, help_text='Enter service date')
     device_add_date = models.DateField(default=timezone.now)

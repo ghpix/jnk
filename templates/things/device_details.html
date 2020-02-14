@@ -2,12 +2,26 @@
 <!-- переопределение блока title -->
 {% block title %}{{ object.device_id }}{% endblock %}
 {% block block_header %}
-    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="javascript:history.back()">Go Back</button>
-    <h2 class="h2">{{ object.device_name }}</h2>{% endblock %}
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'things:index' %}">Go Back</a>
+    <h2 class="h2">{% if object.device_name %}
+        {{ object.device_name }}
+    {% else %}
+        {{ form.device_name.value }}
+    {% endif %}</h2>
+{% endblock %}
+
 {% block block_content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save">
-    </form>
+
+{#    {{ row }}#}
+
+    {% for val in row %}
+       <p> {{ val.label }} {{ val.value }}</p>
+    {% endfor %}
+{#    <form method="post">#}
+{#        <div class="form-group">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{#            <input type="submit" class="btn btn-secondary" value="Save">#}
+{#        </div>#}
+{#    </form>#}
 {% endblock %}
