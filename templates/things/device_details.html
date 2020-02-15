@@ -3,25 +3,38 @@
 {% block title %}{{ object.device_id }}{% endblock %}
 {% block block_header %}
     <a class="btn btn-sm btn-outline-secondary" href="{% url 'things:index' %}">Go Back</a>
-    <h2 class="h2">{% if object.device_name %}
-        {{ object.device_name }}
-    {% else %}
-        {{ form.device_name.value }}
-    {% endif %}</h2>
+    <a class="btn btn-sm btn-outline-secondary" onclick="editForm()"> Edit </a>
+    <h2 class="h2">
+        {% if object.device_name %}
+            {{ object.device_name }}
+        {% elif form.device_name.value %}
+            {{ form.device_name.value }}
+
+        {% else %}
+            Create Things
+        {% endif %}</h2>
+
 {% endblock %}
 
 {% block block_content %}
+    {% if form %}
+        <form method="post">
+            <fieldset id="form" disabled>
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-secondary" value="Save">
+                </div>
+            </fieldset>
+        </form>
+    {% endif %}
+{% endblock %}
 
-{#    {{ row }}#}
-
-    {% for val in row %}
-       <p> {{ val.label }} {{ val.value }}</p>
-    {% endfor %}
-{#    <form method="post">#}
-{#        <div class="form-group">#}
-{#            {% csrf_token %}#}
-{#            {{ form.as_p }}#}
-{#            <input type="submit" class="btn btn-secondary" value="Save">#}
-{#        </div>#}
-{#    </form>#}
+{% block custom_script %}
+    <script>
+        function editForm() {
+            const element = document.getElementById("form");
+            element.disabled ? element.disabled = false : element.disabled = true
+        }
+    </script>
 {% endblock %}

@@ -8,7 +8,8 @@
         }
     </style>
 {% endblock %}
-{% block block_header %} <h2 class="h2">Список Устройств</h2>{% endblock %}
+{% block block_header %} <a class="btn btn-sm btn-outline-secondary" href="{% url 'things:device_create' %}"> Add </a>
+    <h2 class="h2">Список Устройств</h2>{% endblock %}
 {% block block_content %}
 
     {% if device_list %}
@@ -29,7 +30,7 @@
                 </thead>
 
                 {% for device in device_list %}
-                    <tr  class="table-row" data-href="{% url 'things:index' %}{{ device.device_id }}">
+                    <tr class="table-row" data-href="{% url 'things:index' %}{{ device.device_id }}">
                         <td>{{ device.device_id }}</td>
                         <td>{{ device.device_name }}</td>
                         <td>{{ device.device_serial_number }}</td>
