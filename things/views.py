@@ -5,6 +5,7 @@ from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from .models import Device
+from django.urls import reverse_lazy
 from .forms import DeviceForm
 
 
@@ -55,14 +56,14 @@ class ThingsList(ListView):
 #     #     return super(DeviceForm, self).form_valid(form)
 
 
-class ThingsCreate(CreateView):
+class ThingCreate(CreateView):
     model = Device
     fields = ['device_name', 'device_service_date', 'device_model_id', 'device_serial_number', 'device_place_id',
               'device_type_id', 'device_add_date', 'device_part']
     template_name = 'things/create_thing.html'
 
 
-class ThingsView(UpdateView):
+class ThingView(UpdateView):
     model = Device
     fields = ['device_name', 'device_service_date', 'device_model_id', 'device_serial_number', 'device_place_id',
               'device_type_id', 'device_add_date', 'device_part']
@@ -71,3 +72,9 @@ class ThingsView(UpdateView):
     def form_valid(self, form):
         print('GOOD')
         return super().form_valid(form)
+
+
+class ThingDelete(DeleteView):
+    model = Device
+    success_url = reverse_lazy('things:index')
+    template_name = 'things/delete_thing.html'

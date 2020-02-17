@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block block_content %}
-    {% if form %}
         <form method="post">
                 <div class="form-group">
                     {% csrf_token %}
@@ -15,5 +14,4 @@
                     <input type="submit" class="btn btn-secondary" value="Save">
                 </div>
         </form>
-    {% endif %}
 {% endblock %}
