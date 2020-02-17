@@ -1,0 +1,19 @@
+{% extends 'things/base.html' %}
+<!-- переопределение блока title -->
+{% block title %}Create Thing{% endblock %}
+{% block block_header %}
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'things:index' %}">Go Back</a>
+    <h2 class="h2">Create Things</h2>
+{% endblock %}
+
+{% block block_content %}
+    {% if form %}
+        <form method="post">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-secondary" value="Save">
+                </div>
+        </form>
+    {% endif %}
+{% endblock %}

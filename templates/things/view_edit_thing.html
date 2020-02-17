@@ -1,0 +1,51 @@
+{% extends 'things/base.html' %}
+<!-- переопределение блока title -->
+{% block title %}{{ object.device_name }} id:{{ object.device_id }}{% endblock %}
+{% block block_header %}
+    <div class="btn-toolbar mb-2 mb-md-0">
+
+        <div class="btn-group mr-2">
+            <a href="{% url 'things:index' %}">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
+            </a>
+
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="editForm()">Edit</button>
+    </div>
+
+
+    {#    <a class="btn btn-sm btn-outline-secondary" href="{% url 'things:index' %}"></a>#}
+    {#    <a class="btn btn-sm btn-outline-secondary" onclick="editForm()"> Edit </a>#}
+    <h2 class="h2">
+        {{ form.device_name.value }}
+        {#        {% if object.device_name %}#}
+        {#            {{ object.device_name }}#}
+        {#        {% else form.device_name.value %}#}
+        {#            {{ form.device_name.value }}#}
+        {#        {% endif %}#}
+    </h2>
+
+{% endblock %}
+
+{% block block_content %}
+    {% if form %}
+        <form method="post">
+            <fieldset id="form" disabled>
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-secondary" value="Save">
+                </div>
+            </fieldset>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block custom_script %}
+    <script>
+        function editForm() {
+            const element = document.getElementById("form");
+            element.disabled ? element.disabled = false : element.disabled = true
+        }
+    </script>
+{% endblock %}

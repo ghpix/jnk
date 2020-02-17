@@ -24,7 +24,7 @@ class ThingsList(ListView):
 # # show one device details
 # # class ThingsView(DetailView):
 # #     model = Device
-# #     template_name = 'things/device_details.html'
+# #     template_name = 'things/view_edit_thing.html'
 # #
 # #     queryset = Device.objects.all()
 # #
@@ -35,7 +35,7 @@ class ThingsList(ListView):
 #
 # class ThingsView(FormView):
 #     model = Device
-#     template_name = 'things/device_details.html'
+#     template_name = 'things/view_edit_thing.html'
 #     form_class = DeviceForm
 #     # queryset = Device.objects.all()
 #
@@ -59,14 +59,14 @@ class ThingsCreate(CreateView):
     model = Device
     fields = ['device_name', 'device_service_date', 'device_model_id', 'device_serial_number', 'device_place_id',
               'device_type_id', 'device_add_date', 'device_part']
-    template_name = 'things/device_details.html'
+    template_name = 'things/create_thing.html'
 
 
 class ThingsView(UpdateView):
     model = Device
     fields = ['device_name', 'device_service_date', 'device_model_id', 'device_serial_number', 'device_place_id',
               'device_type_id', 'device_add_date', 'device_part']
-    template_name = 'things/device_details.html'
+    template_name = 'things/view_edit_thing.html'
 
     def form_valid(self, form):
         print('GOOD')
