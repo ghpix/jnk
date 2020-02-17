@@ -11,8 +11,7 @@
         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="editForm()">Edit</button>
     </div>
     <h2 class="h2">{{ object.device_name }} ID:{{ object.device_id }}</h2>
-    <a class="btn btn-sm btn-outline-danger" href="./delete">Delete</a>
-
+    <a class="btn btn-sm btn-outline-danger" href="{% url 'things:device_delete' pk=object.device_id %}">Delete</a>
 {% endblock %}
 
 {% block block_content %}

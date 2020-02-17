@@ -30,7 +30,7 @@
                 </thead>
 
                 {% for device in device_list %}
-                    <tr class="table-row" data-href="{% url 'things:index' %}{{ device.device_id }}">
+                    <tr class="table-row" data-href="{{ object.get_absolute_url }}{{ device.device_id }}">
                         <td>{{ device.device_id }}</td>
                         <td>{{ device.device_name }}</td>
                         <td>{{ device.device_serial_number }}</td>
