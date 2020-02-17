@@ -7,11 +7,11 @@
             <a href="{% url 'things:index' %}">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
             </a>
-
         </div>
         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="editForm()">Edit</button>
     </div>
     <h2 class="h2">{{ object.device_name }} ID:{{ object.device_id }}</h2>
+    <a class="btn btn-sm btn-outline-danger" href="./delete">Delete</a>
 
 {% endblock %}
 
