@@ -6,6 +6,9 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from .models import Device
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from .forms import DeviceForm
 
 
@@ -14,6 +17,14 @@ class ThingsList(ListView):
     model = Device
     template_name = 'things/index.html'
     context_object_name = 'device_list'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            print('YES')
+            return render(request, template_name=self.template_name)
+        else:
+            print('NO')
+            return render(request, template_name=self.template_name)
 
     # # # todo Filter !!!
     # def get_context_data(self, **kwargs):
@@ -78,3 +89,24 @@ class ThingDelete(DeleteView):
     model = Device
     success_url = reverse_lazy('things:index')
     template_name = 'things/delete_thing.html'
+
+
+class SingIn(AuthenticationForm):
+    pass
+
+
+class SingOut(AuthenticationForm):
+    pass
+
+
+class CreateAccount(FormView):
+    form_class = UserCreationForm
+    success_url = 'things:index'
+    template_name = 'things/create_account.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
